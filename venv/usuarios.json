@@ -1,0 +1,45 @@
+{"usuarios" :[
+    {
+    "Nombre y Apellido":"Nicolas Vaylet",
+    "contrasenia":1111
+    },
+    {"Nombre y Apellido":"Joaquin Allende",
+     "contrasenia":1112
+    },
+    {"Nombre y Apellido":"Javier Balmaceda",
+     "contrasenia":1113
+    },
+    {"Nombre y Apellido":"Martin Troilo",
+     "contrasenia":1114
+    },
+    {"Nombre y Apellido":"Marco Urtarroz",
+     "contrasenia":1115
+    },
+    {"Nombre y Apellido":"Carlos Berger",
+     "contrasenia":1116
+    },
+    {"Nombre y Apellido":"Mauro Torre",
+     "contrasenia":1117
+    },
+    {"Nombre y Apellido":"Camila Iniguez",
+     "contrasenia":1118
+    },
+    {"Nombre y Apellido":"Constanza Gonzalez",
+     "contrasenia":1119
+    },
+    {"Nombre y Apellido":"Micaela Perez",
+     "contrasenia":2111
+    },
+    {"Nombre y Apellido":"Simona Garcia",
+     "contrasenia":2112
+    },
+    {"Nombre y Apellido":"Genaro Fernandez",
+     "contrasenia":2113
+    },
+    {"Nombre y Apellido":"Cristina Aguilera",
+     "contrasenia":2114
+    },
+    {"Nombre y Apellido":"Alberto Comodoro", 
+    "contrasenia":2115
+    }]
+}

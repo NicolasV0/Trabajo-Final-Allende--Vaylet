@@ -1,0 +1,161 @@
+{
+    "peliculas": [
+        {
+            "titulo": "Spider man-lejos de casa",
+            "anio": 2019,
+            "director": "Jon Watts",
+            "genero": "accion",
+            "sinopsis": "Tras descubrirse ...",
+            "imagen": "https://www.sensacine.com/peliculas/pelicula-222291/",
+            "comentarios": {}
+        },
+        {
+            "titulo": "Soul",
+            "anio": 2020,
+            "director": "Pete Doctor",
+            "genero": "infantil",
+            "sinopsis": "Cuando un jazzista profesional...",
+            "imagen": "https://www.sensacine.com/peliculas/pelicula-222291/",
+            "comentarios": {
+                "Nicolas Vaylet": "holaaa"
+            }
+        },
+        {
+            "titulo": "Vengadores- infinity war",
+            "anio": 2018,
+            "director": "Anthony Russo",
+            "genero": "accion",
+            "sinopsis": "...",
+            "imagen": "https://www.sensacine.com/peliculas/pelicula-222291/",
+            "comentarios": {}
+        },
+        {
+            "titulo": "El lobo de wall street",
+            "anio": 2013,
+            "director": "Martin Scorsese",
+            "genero": "drama",
+            "sinopsis": "...",
+            "imagen": "https://www.sensacine.com/peliculas/pelicula-222291/",
+            "comentarios": {}
+        },
+        {
+            "titulo": "Black Adam",
+            "anio": 2022,
+            "director": "Jaume Collet",
+            "genero": "accion",
+            "sinopsis": "...",
+            "imagen": "https://www.sensacine.com/peliculas/pelicula-253389/",
+            "comentarios": {}
+        },
+        {
+            "titulo": "Top Gun: Maverick",
+            "anio": 2022,
+            "director": "Joseph Kosinski",
+            "genero": "accion",
+            "sinopsis": "...",
+            "imagen": "https://www.sensacine.com/peliculas/pelicula-186636/",
+            "comentarios": {}
+        },
+        {
+            "titulo": "Deadpool 2",
+            "anio": 2016,
+            "director": "Tim Miller",
+            "genero": "accion",
+            "sinopsis": "...",
+            "imagen": "https://www.sensacine.com/peliculas/pelicula-146349/",
+            "comentarios": {}
+        },
+        {
+            "titulo": "Luca",
+            "anio": 2021,
+            "director": "Enrico Casarosa",
+            "genero": "infantil",
+            "sinopsis": "...",
+            "imagen": "https://www.sensacine.com/peliculas/pelicula-285584/",
+            "comentarios": {}
+        },
+        {
+            "titulo": "Origen",
+            "anio": 2015,
+            "director": "Christopher Nolan",
+            "genero": "suspenso",
+            "sinopsis": "...",
+            "imagen": "https://www.sensacine.com/peliculas/pelicula-143692/",
+            "comentarios": {
+                "Joaquin Allende": "te vuela la cabeza!"
+            }
+        },
+        {
+            "titulo": "Interestelar",
+            "anio": 2016,
+            "director": "Christopher Nolan",
+            "genero": "suspenso",
+            "sinopsis": "...",
+            "imagen": "https://www.sensacine.com/peliculas/pelicula-114782/",
+            "comentarios": {}
+        },
+        {
+            "titulo": "Dunkerque",
+            "anio": 2017,
+            "director": "Christopher Nolan",
+            "genero": "accion",
+            "sinopsis": "...",
+            "imagen": "https://www.sensacine.com/peliculas/pelicula-240850/",
+            "comentarios": {}
+        },
+        {
+            "titulo": "La mujer Rey",
+            "anio": 2022,
+            "director": "Gina Prince",
+            "genero": "drama",
+            "sinopsis": "...",
+            "imagen": "https://www.sensacine.com/peliculas/pelicula-263074/",
+            "comentarios": {}
+        },
+        {
+            "titulo": "La dama de hierro",
+            "anio": 2012,
+            "director": "Phyllida Lloyd",
+            "genero": "drama",
+            "sinopsis": "Tras descubrirse ...",
+            "imagen": "https://www.sensacine.com/peliculas/pelicula-127404/",
+            "comentarios": {}
+        },
+        {
+            "titulo": "La caca de hierro",
+            "anio": 2012,
+            "director": "Phyllida Lloyd",
+            "genero": "drama",
+            "sinopsis": "Tras descubrirse ...",
+            "imagen": "https://www.sensacine.com/peliculas/pelicula-127401/",
+            "comentarios": {}
+        },
+        {
+            "titulo": "Juanito",
+            "anio": 2012,
+            "director": "Phyllida Lloyd",
+            "genero": "drama",
+            "sinopsis": "Tras descubrirse ...",
+            "imagen": "https://www.sensacine.com/peliculas/pelicula-127404/",
+            "comentarios": {}
+        },
+        {
+            "titulo": "Juanito la saga",
+            "anio": 2021,
+            "director": "Niasdcolas asdasda",
+            "genero": "drama",
+            "sinopsis": "Tras descubrirse ...",
+            "imagen": "https://www.sensacine.com/peliculas/pelicula-127404/",
+            "comentarios": {}
+        },
+        {
+            "titulo": "Deadpool 4",
+            "anio": 2012,
+            "director": "Phyllida Lloyd",
+            "genero": "drama",
+            "sinopsis": "Tras descubrirse ...",
+            "imagen": "https://www.sensacine.com/peliculas/pelicula-127404/",
+            "comentarios": {}
+        }
+    ]
+}
