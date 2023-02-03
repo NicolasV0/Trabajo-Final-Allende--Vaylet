@@ -96,3 +96,291 @@ def portada():
         if cont%2 == 0:
             print('------------------------------')
     return jsonify(peliculas_portada)
+###############################ABM PELICULAS###########################################
+
+@app.route("/peliculas/agregar" , methods=["PUT"])
+def agregar_pelicula():
+    try:
+        pelicula = request.get_json()
+        for pelis in dic_peliculas["peliculas"]:
+            if pelis["titulo"].lower() == pelicula["titulo"].lower():
+                return Response({'Pelicula ya agregada'}, HTTPStatus.ALREADY_REPORTED)
+        dic_peliculas["peliculas"].append({
+            "titulo": pelicula["titulo"],
+            "anio": pelicula["anio"],
+            "director": pelicula["director"],
+            "genero": pelicula["genero"],
+            "sinopsis": pelicula["sinopsis"],
+            "imagen": pelicula["imagen"],
+            "comentarios": pelicula["comentarios"]
+        })
+        with open("peliculas.json", 'w') as file:
+            json.dump(dic_peliculas, file, indent=4)
+        return Response({"Pelicula cargada "}, HTTPStatus.OK)        
+    except:
+        return Response({"Error en datos ingresados"}, HTTPStatus.BAD_REQUEST)  
+
+@app.route("/peliculas/modificar/<pelicula>" , methods=["PUT"])
+def modificar_pelicula(pelicula):
+    try:
+        j_pelicula = request.get_json()
+        for pelis in dic_peliculas["peliculas"]:
+            if pelis["titulo"].lower() == pelicula.lower():
+                pelis['titulo'] = j_pelicula['titulo']
+                pelis['anio'] = j_pelicula['anio']
+                pelis['director'] = j_pelicula['director']
+                pelis['genero'] = j_pelicula['genero']
+                pelis['sinopsis'] = j_pelicula['sinopsis']
+                pelis['imagen'] = j_pelicula['imagen']
+                with open("peliculas.json", 'w') as file:
+                    json.dump(dic_peliculas, file, indent=4)
+                return Response({"Pelicula modificada "}, HTTPStatus.OK)  
+        return Response({'Pelicula no encontrada'}, HTTPStatus.NOT_FOUND)                
+    except:
+        return Response({"Error en datos ingresados"}, HTTPStatus.BAD_REQUEST) 
+
+@app.route("/comentarios/borrar/<pelicula>" , methods=["DELETE"])
+def borrar_comentarios(pelicula):
+    comentario = request.get_json()
+    for pelis in dic_peliculas["peliculas"]:
+        if pelis["titulo"].lower() == pelicula.lower():
+            for llaves in pelis['comentarios']:
+                print(llaves)
+                if llaves == comentario['comentarios']:
+                    print(llaves)
+                    pelis['comentarios'].pop(llaves)
+                    with open("peliculas.json", 'w') as file:
+                        json.dump(dic_peliculas, file, indent=4)
+                    return Response({"Comentario borrado"}, HTTPStatus.ACCEPTED)
+                
+            return Response({'Comentario no encontrado'}, HTTPStatus.NOT_FOUND)
+    return Response({'Pelicula no encontrada'}, HTTPStatus.NOT_FOUND)
+
+@app.route("/peliculas/borrar" , methods=["DELETE"])
+def borrar_pelicula():
+    cont = 0
+    try:
+        pelicula = request.get_json()
+        for pelis in dic_peliculas["peliculas"]:
+            cont = cont + 1
+            if pelis["titulo"].lower() == pelicula["titulo"].lower():
+                dic_peliculas['peliculas'].pop(cont -1)
+                with open("peliculas.json", 'w') as file:
+                    json.dump(dic_peliculas, file, indent=4)
+                print('Pelicula borrada...')
+                return Response({'Pelicula eliminada correctamente'}, HTTPStatus.ACCEPTED) 
+        return Response({'Pelicula no encontrada'}, HTTPStatus.NOT_FOUND)                
+    except:
+        return Response({"Error en datos ingresados"}, HTTPStatus.BAD_REQUEST) 
+    
+
+#################################################################################
+#################### MENU INICIO SESION #####################################    
+def menu_usuarios():
+    while(True):
+        print('+--------------------------+')
+        print('|                          |')
+        print('|1)   Inicie sesion        |')
+        print('|2)   Modo libre           |')
+        print('|                          |')
+        print('+--------------------------+')
+        try:
+            in_menu = int(input())
+            if (in_menu != 1) and (in_menu !=2):
+                print('Error... Ingrese 1 o 2')
+                time.sleep(1)
+                os.system('cls')
+            elif (in_menu == 1 or in_menu == 2):
+                return in_menu
+        except:
+            print('Error... Ingrese 1 o 2')
+            time.sleep(1)
+            os.system('cls')
+            menu_usuarios()
+                    
+#################### MENU PRINCIPAL #####################################    
+def imprimir_menu():
+    print('\033[0;31m' +'+--------------------------------------------------------------+'+'\033[0;m')
+    print('\033[0;31m' +'|                                                              |'+'\033[0;m')
+    print('\033[0;31m' +'|       N    N  NNNNN  NNNNN  NNNNN  N      NNNNN  N   N       |'+'\033[0;m')
+    print('\033[0;31m' +'|       NN   N  N        N    N      N      N   N   N N        |'+'\033[0;m')
+    print('\033[0;31m' +'|       N N  N  NNN      N    NNN    N      N   N    N         |'+'\033[0;m')
+    print('\033[0;31m' +'|       N  N N  N        N    N      N      N   N   N N        |'+'\033[0;m')
+    print('\033[0;31m' +'|       N   NN  NNNNN    N    N      NNNNN  NNNNN  N   N       |'+'\033[0;m')
+    print('\033[0;31m' +'|                                                              |'+'\033[0;m')
+    print('\033[0;31m' +'+--------------------------------------------------------------+'+'\033[0;m')
+    time.sleep(2 )
+    os.system('cls')      
+    return
+
+#########################INICIAR SESION##################################
+def iniciar_sesion():
+    while (True):
+        flag = False
+        usuario = input('Ingrese Nombre y Apellido: ')
+        try:
+            contraseña = int(input('Ingrese Contraseña: '))
+        except:
+            print('Error de dato, vuelva a intentarlo')
+            flag = True
+            continue    
+        for us in dic_usuarios['usuarios']:    
+            if us['Nombre y Apellido'].lower() == usuario.lower():
+                if us['contrasenia'] == contraseña:
+                    print('Has iniciado sesion')
+                    return us['Nombre y Apellido']
+                else:
+                    print('Contrasenia incorrecta')
+                    flag = True
+                    continue
+        if flag == False:            
+            print('Usuario inxistente')
+        print('1) Para Menu de inicio')
+        print('2) Para modo libre')
+        print('3) Para volver a intentar')
+        print('4) Para cerrar')
+        opcion = int(input('Como desea continuar: '))
+        if opcion == 1:
+            os.system('cls')      
+            return
+        if opcion == 2:
+        #modo_libre()
+            print('modo libre')
+            exit(1)
+        if opcion == 3:
+            os.system('cls')
+            continue
+        if opcion == 4:
+            break
+
+
+def sesion_iniciada(usuario):
+    opcion= 0
+    continuar=""
+    print('Bienvenido ' ,usuario)
+    time.sleep(1)
+    while(opcion!= 8):
+        os.system('cls')
+        print('+-------------------------------------+')
+        print('|                                     |')
+        print('|1)Peliculas disponibles              |')    
+        print('|2)Buscar Titulo                      |')
+        print('|3)Buscar Titulos por primera letra   |')    
+        print('|4)Buscar Director                    |')    
+        print('|5)Buscar Genero                      |')
+        print('|6)Comentarios                        |')
+        print('|7)Ver comentarios                    |')                
+        print('|8)Borrar pelicula                    |')
+        print('|9)Editar pelicula                    |')
+        print('|10)Cerrar sesion                     |')            
+        print('|                                     |')
+        print('+-------------------------------------+')    
+        opcion = int(input('¿Que desea realizar? '))
+        if opcion >=11 or opcion <=0:
+            print('Error seleccion invalida...')
+            time.sleep(1)
+            continue
+        elif opcion == 1:
+            for pelis in dic_peliculas['peliculas']:
+                print ('Pelicula:',pelis['titulo'])
+                print('Link imagen:',pelis['imagen'])
+                time.sleep(1)
+            while(True):
+                continuar= input('Presione Enter para continuar...')
+                if continuar != "":    
+                    print('Error, presione enter')
+                else:
+                    break
+                
+        elif opcion ==2:
+            flag = False
+            buscar_peli = input('¿Que pelicula desea buscar?: ')
+            for pelis in dic_peliculas['peliculas']:
+                if buscar_peli.lower() in pelis['titulo'].lower() :
+                    flag = True
+                    print('Hemos encontrado esto para ti: \n')
+                    print("Pelicula:",pelis['titulo'])
+                    print('anio:',pelis['anio'])
+                    print('Link imagen:',pelis['imagen'])
+                    print('Director:',pelis['director'])
+                    print('Genero:',pelis['genero'])
+                    print('Sinopsis:',pelis['sinopsis'])
+                    while(True):
+                        continuar= input('Presione Enter para continuar...')
+                        if continuar != "":    
+                            print('Error, presione enter')
+                        else:
+                            break
+            if flag == False:
+                print('Lo sentimos no hemos encontrado esa pelicula, prueba en Netflix...')
+                time.sleep(2)
+        
+        elif opcion ==3:
+            flag = False
+            buscar_peli = input('¿Que peliculas desea buscar que comience con la letra?: ')
+            for pelis in dic_peliculas['peliculas']:
+                if pelis['titulo'][0].lower() == buscar_peli.lower():
+                    flag = True
+                    print('Pelicula:',pelis['titulo'])
+                    time.sleep(1)
+            if flag == False:
+                print('Lo sentimos no hemos encontrado peliculas que empiecen con '+buscar_peli+', prueba en Netflix...')
+                time.sleep(1)
+            while(True):
+                        continuar= input('Presione Enter para continuar...')
+                        if continuar != "":    
+                            print('Error, presione enter')
+                        else:
+                            break
+        
+        elif opcion == 4:
+            cont = 0
+            flag = False
+            buscar_director = input('¿Que director desea buscar? ')
+            for pelis in dic_peliculas['peliculas']:
+                if buscar_director.lower() in pelis['director'].lower():
+                    if cont == 0:
+                        print('Para '+pelis['director']+' hemos encontrado los siguientes titulos: ')
+                    else:
+                         print('-----------------------------------')
+                    print("Pelicula:",pelis['titulo'])
+                    print('anio:',pelis['anio'])
+                    print('Genero:',pelis['genero'])
+                    print('Sinopsis:',pelis['sinopsis'])
+                    cont = cont + 1
+                    flag = True
+            if flag == False:
+                print('Lo sentimos no hemos encontrado a ese director en nuestro catalogo, mejor prueba en Netflix...')
+                time.sleep(1)
+            while(True):
+                        continuar= input('Presione Enter para continuar...')
+                        if continuar != "":    
+                            print('Error, presione enter')
+                        else:
+                            break
+        
+        elif opcion == 5:
+            flag = False
+            cont = 0
+            buscar_genero = input('¿Que genero de peliculas desea buscar? ')
+            for pelis in dic_peliculas['peliculas']:
+                if buscar_genero.lower() in pelis['genero'].lower():
+                    if cont == 0:
+                        print('Peliculas de genero '+ pelis['genero'])
+                    else:
+                        print('-----------------------------------')
+                    print("Pelicula:",pelis['titulo'])
+                    print('anio:',pelis['anio'])
+                    print('Director:',pelis['director'])
+                    print('Sinopsis:',pelis['sinopsis'])
+                    cont = cont + 1
+                    flag = True
+            if flag == False:
+                print('Lo sentimos no hemos encontrado a ese genero en nuestro catalogo, mejor prueba en Netflix...')
+                time.sleep(1)
+            while(True):
+                        continuar= input('Presione Enter para continuar...')
+                        if continuar != "":    
+                            print('Error, presione enter')
+                        else:
+                            break
