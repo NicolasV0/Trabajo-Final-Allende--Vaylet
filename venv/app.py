@@ -64,3 +64,35 @@ def peli_director(director):
         if cont%2 == 0:
             print('------------------------------')
     return jsonify(pelis_director)
+
+@app.route("/generos")
+def generos():
+    list_generos =[]
+    print("Generos disponibles en nuestra plataforma: ")
+    for pelis in dic_peliculas["peliculas"]:
+        list_generos.append(pelis['genero']) 
+    conjunto = set(list_generos)
+    list_generos = list(conjunto)
+    for genero in list_generos:            
+        print(genero)
+        print('------------------------------')
+    return jsonify(list_generos)
+
+@app.route("/peliculas/portada")
+def portada():
+    cont = 0
+    peliculas_portada =[]
+    print("Peliculas con portada disponibles en nuestra plataforma: ")
+    for pelis in dic_peliculas["peliculas"]:
+        if pelis['imagen'] != []:
+            peliculas_portada.append(pelis['titulo']) 
+            peliculas_portada.append(pelis['imagen'])
+    if peliculas_portada ==[]:
+        print('Ninguna pelicula cargada tiene imagen de portada')
+        return Response({'Ninguna pelicula cargada tiene imagen de portada'}, HTTPStatus.NO_CONTENT) 
+    for portada in peliculas_portada:            
+        cont = cont +1
+        print(portada)
+        if cont%2 == 0:
+            print('------------------------------')
+    return jsonify(peliculas_portada)
