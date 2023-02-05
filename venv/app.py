@@ -384,3 +384,205 @@ def sesion_iniciada(usuario):
                             print('Error, presione enter')
                         else:
                             break
+                        
+        elif opcion == 6:
+            while(True):
+                print("1)Realizar un comentario sobre alguna pelicula")
+                print("2)Volver al menu anterior")
+                opcion = int(input())
+                if opcion >= 3 or opcion <=0:
+                    print('Seleccion invalida')
+                    continue
+                if opcion == 2:
+                    break
+                else:
+                    flag = False
+                    flag_comentario = False
+                    buscar_peli = input('¿Sobre que pelicula desea hacer un comentario?: ')
+                    for pelis in dic_peliculas['peliculas']:
+                        if buscar_peli.lower() == pelis['titulo'].lower() :
+                            for llaves in pelis['comentarios']:
+                                if llaves == usuario:
+                                    print('Ya hiciste un comentario sobre esa pelicula')
+                                    modificar = input('¿Desea modificarlo? (S/N)')
+                                    if modificar == 's' or modificar=='S':
+                                        break
+                                    else:
+                                        flag_comentario = True
+                                        continue
+                            if flag_comentario == True:
+                                break
+                            flag = True
+                            print('Hemos encontrado esto para ti: \n')
+                            print("Pelicula:",pelis['titulo'])
+                            print('anio:',pelis['anio'])
+                            print('Link imagen:',pelis['imagen'])
+                            print('Director:',pelis['director'])
+                            print('Genero:',pelis['genero'])
+                            comentario = input('Comente aqui sobre la pelicula: ')
+                            pelis['comentarios'].update({usuario:comentario})
+                            with open("peliculas.json", 'w') as file:
+                                json.dump(dic_peliculas, file, indent=4)
+                            #    file.seek(0)                         
+                            while(True):
+                                continuar= input('Presione Enter para continuar...')
+                                if continuar != "":    
+                                    print('Error, presione enter')
+                                else:
+                                    break
+                                if flag == False:
+                                    print('Lo sentimos no hemos encontrado esa pelicula, prueba en Netflix...')
+        
+        elif opcion == 7:
+            flag = False
+            buscar_peli = input('¿Que pelicula desea buscar?: ')
+            for pelis in dic_peliculas['peliculas']:
+                if buscar_peli.lower() in pelis['titulo'].lower() :
+                    if pelis['comentarios'] == {}:
+                        print("Pelicula:",pelis['titulo'])
+                        print('Esta pelicula aun no tiene comentarios...')
+                        time.sleep(2)
+                        flag = True
+                        break
+                    flag = True
+                    print('Hemos encontrado esto para ti: \n')
+                    print("Pelicula:",pelis['titulo'])
+                    print('anio:',pelis['anio'])
+                    print('Link imagen:',pelis['imagen'])
+                    print('Director:',pelis['director'])
+                    print('Genero:',pelis['genero'])
+                    print('Sinopsis:',pelis['sinopsis'])
+                    print('Comentarios: ')
+                    for llave, valor in pelis['comentarios'].items():
+                        print(f"{llave}: {valor}")
+                    while(True):
+                        continuar= input('Presione Enter para continuar...')
+                        if continuar != "":    
+                            print('Error, presione enter')
+                        else:
+                            break
+            if flag == False:
+                print('Lo sentimos no hemos encontrado esa pelicula, prueba en Netflix...')
+                time.sleep(2)
+        
+        elif opcion == 8:
+            while(True):
+                print('1)Eliminar una pelicula')    
+                print('2)Volver')
+                opcion = int(input())
+                if opcion == 1:
+                    cont = 0
+                    peli_borrar = input('¿Que pelicula desea borrar?: ')
+                    for pelis in dic_peliculas['peliculas']:
+                        cont = cont + 1
+                        if peli_borrar.lower() == pelis['titulo'].lower(): 
+                            if pelis['comentarios'] == {}:
+                                dic_peliculas['peliculas'].pop(cont -1)
+                                with open("peliculas.json", 'w') as file:
+                                    json.dump(dic_peliculas, file, indent=4)
+                                print('Pelicula borrada...')
+                                cont = 0
+                                time.sleep(2)
+                                break
+                    if cont == 0:
+                        break
+                    else:        
+                        print('Esa pelicula tiene comentarios, no se puede borrar...')
+                        time.sleep(2)
+                    break
+                elif opcion == 2:
+                    break
+                elif opcion<=0 or opcion >=3:
+                    print('Vuelva a intentarlo...')    
+        
+        elif opcion == 9:
+            while(True):
+                flag = False
+                print('1) Para editar una pelicula')
+                print('2) Volver')
+                opcion = int(input())
+                if opcion == 1:
+                    editar = input('Que pelicula desea editar: ')
+                    for pelis in dic_peliculas['peliculas']:
+                        if editar.lower() == pelis['titulo'].lower():
+                            flag = True
+                            print("1)Editar titulo:")
+                            print("2)Editar anio:")
+                            print("3)Editar director:")
+                            print("4)Editar genero:")
+                            print("5)Editar sinopsis:")
+                            print("6)Editar imagen:")
+                            op = int(input(''))
+                            if op == 1:
+                                cambiar = input('Ingrese nuevo titulo: ')
+                                pelis['titulo'] = cambiar
+                                with open("peliculas.json", 'w') as file:
+                                    json.dump(dic_peliculas, file, indent=4)
+                                print('Titulo cambiado exitosamente')
+                                time.sleep(2)
+                                break
+                            elif op == 2:
+                                cambiar = input('Ingrese nuevo anio: ')
+                                pelis['anio'] = cambiar
+                                with open("peliculas.json", 'w') as file:
+                                    json.dump(dic_peliculas, file, indent=4)
+                                print('Anio cambiado exitosamente')
+                                time.sleep(2)
+                                break
+                            elif op == 3:
+                                cambiar = input('Ingrese nuevo director: ')
+                                pelis['director'] = cambiar
+                                with open("peliculas.json", 'w') as file:
+                                    json.dump(dic_peliculas, file, indent=4)
+                                print('Director cambiado exitosamente')
+                                time.sleep(2)
+                                break
+                            elif op == 4:
+                                cambiar = input('Ingrese nuevo genero: ')
+                                pelis['genero'] = cambiar
+                                with open("peliculas.json", 'w') as file:
+                                    json.dump(dic_peliculas, file, indent=4)
+                                print('Genero cambiado exitosamente')
+                                time.sleep(2)
+                                break
+                            elif op == 5:
+                                cambiar = input('Ingrese nuevo sinopsis: ')
+                                pelis['sinopsis'] = cambiar
+                                with open("peliculas.json", 'w') as file:
+                                    json.dump(dic_peliculas, file, indent=4)
+                                print('Sinopsis cambiado exitosamente')
+                                time.sleep(2)
+                                break
+                            elif op == 6:
+                                cambiar = input('Ingrese nuevo imagen: ')
+                                pelis['imagen'] = cambiar
+                                with open("peliculas.json", 'w') as file:
+                                    json.dump(dic_peliculas, file, indent=4)
+                                print('Imagen cambiado exitosamente')
+                                time.sleep(2)
+                                break
+                            elif op >= 7 or op <= 0:
+                                print("Seleccion invalida")
+                                continue             
+                    if flag == False:
+                        print('Pelicula no encontrada')
+                        continue        
+                                
+                elif opcion ==2:
+                    break
+                elif opcion <= 0 or opcion >= 3:
+                    print('Seleccione 1 o 2 ')
+                    continue     
+                   
+        elif opcion == 10:
+            while(True):
+                cambiar_usuario = input('¿Desea cerrar sesion? (S/N)')                    
+                if cambiar_usuario == "s" or cambiar_usuario == "S":
+                    print('Gracias! Recuerde que nuestro catalogo es mejor que el de la copia...')
+                    time.sleep(2)
+                    return
+                elif cambiar_usuario == "n" or cambiar_usuario == "N":
+                    break
+                else:
+                    print('Error ingrese S o N')
+        
