@@ -244,7 +244,7 @@ def iniciar_sesion():
             os.system('cls')      
             return
         if opcion == 2:
-        #modo_libre()
+        modo_libre()
             print('modo libre')
             exit(1)
         if opcion == 3:
@@ -586,3 +586,20 @@ def sesion_iniciada(usuario):
                 else:
                     print('Error ingrese S o N')
         
+  
+    
+def modo_libre(): 
+    empieza = len(dic_peliculas["peliculas"]) - 9
+    cont = 0
+    print('Hemos encontrado esto para ti: \n')
+    for pelis in dic_peliculas["peliculas"]:
+        cont += 1
+        if cont >= empieza:
+            print("Pelicula:",pelis['titulo'])
+            print('anio:',pelis['anio'])
+            print('Link imagen:',pelis['imagen'])
+            print('Director:',pelis['director'])
+            print('Genero:',pelis['genero'])
+            print('Sinopsis:',pelis['sinopsis'])
+            print("-------------------------") 
+    return    
