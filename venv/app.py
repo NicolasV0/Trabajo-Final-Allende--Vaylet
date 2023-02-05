@@ -244,7 +244,7 @@ def iniciar_sesion():
             os.system('cls')      
             return
         if opcion == 2:
-        modo_libre()
+            modo_libre()
             print('modo libre')
             exit(1)
         if opcion == 3:
