@@ -7,7 +7,8 @@
             "genero": "accion",
             "sinopsis": "Tras descubrirse ...",
             "imagen": "https://www.sensacine.com/peliculas/pelicula-222291/",
-            "comentarios": {}
+            "comentarios": {},
+            "puntuacion": {}
         },
         {
             "titulo": "Soul",
@@ -18,6 +19,11 @@
             "imagen": "https://www.sensacine.com/peliculas/pelicula-222291/",
             "comentarios": {
                 "Nicolas Vaylet": "holaaa"
+            },
+            "puntuacion": {
+                "Nicolas Vaylet": 9,
+                "Joaquin Allende": 8,
+                "Javier Balmaceda": 8
             }
         },
         {
@@ -27,7 +33,8 @@
             "genero": "accion",
             "sinopsis": "...",
             "imagen": "https://www.sensacine.com/peliculas/pelicula-222291/",
-            "comentarios": {}
+            "comentarios": {},
+            "puntuacion": {}
         },
         {
             "titulo": "El lobo de wall street",
@@ -36,7 +43,8 @@
             "genero": "drama",
             "sinopsis": "...",
             "imagen": "https://www.sensacine.com/peliculas/pelicula-222291/",
-            "comentarios": {}
+            "comentarios": {},
+            "puntuacion": {}
         },
         {
             "titulo": "Black Adam",
@@ -45,7 +53,8 @@
             "genero": "accion",
             "sinopsis": "...",
             "imagen": "https://www.sensacine.com/peliculas/pelicula-253389/",
-            "comentarios": {}
+            "comentarios": {},
+            "puntuacion": {}
         },
         {
             "titulo": "Top Gun: Maverick",
@@ -54,7 +63,8 @@
             "genero": "accion",
             "sinopsis": "...",
             "imagen": "https://www.sensacine.com/peliculas/pelicula-186636/",
-            "comentarios": {}
+            "comentarios": {},
+            "puntuacion": {}
         },
         {
             "titulo": "Deadpool 2",
@@ -63,7 +73,10 @@
             "genero": "accion",
             "sinopsis": "...",
             "imagen": "https://www.sensacine.com/peliculas/pelicula-146349/",
-            "comentarios": {}
+            "comentarios": {},
+            "puntuacion": {
+                "Nicolas Vaylet": 10
+            }
         },
         {
             "titulo": "Luca",
@@ -72,7 +85,10 @@
             "genero": "infantil",
             "sinopsis": "...",
             "imagen": "https://www.sensacine.com/peliculas/pelicula-285584/",
-            "comentarios": {}
+            "comentarios": {},
+            "puntuacion": {
+                "Nicolas Vaylet": 5
+            }
         },
         {
             "titulo": "Origen",
@@ -83,7 +99,8 @@
             "imagen": "https://www.sensacine.com/peliculas/pelicula-143692/",
             "comentarios": {
                 "Joaquin Allende": "te vuela la cabeza!"
-            }
+            },
+            "puntuacion": {}
         },
         {
             "titulo": "Interestelar",
@@ -92,7 +109,8 @@
             "genero": "suspenso",
             "sinopsis": "...",
             "imagen": "https://www.sensacine.com/peliculas/pelicula-114782/",
-            "comentarios": {}
+            "comentarios": {},
+            "puntuacion": {}
         },
         {
             "titulo": "Dunkerque",
@@ -101,7 +119,8 @@
             "genero": "accion",
             "sinopsis": "...",
             "imagen": "https://www.sensacine.com/peliculas/pelicula-240850/",
-            "comentarios": {}
+            "comentarios": {},
+            "puntuacion": {}
         },
         {
             "titulo": "La mujer Rey",
@@ -110,7 +129,8 @@
             "genero": "drama",
             "sinopsis": "...",
             "imagen": "https://www.sensacine.com/peliculas/pelicula-263074/",
-            "comentarios": {}
+            "comentarios": {},
+            "puntuacion": {}
         },
         {
             "titulo": "La dama de hierro",
@@ -119,7 +139,8 @@
             "genero": "drama",
             "sinopsis": "Tras descubrirse ...",
             "imagen": "https://www.sensacine.com/peliculas/pelicula-127404/",
-            "comentarios": {}
+            "comentarios": {},
+            "puntuacion": {}
         },
         {
             "titulo": "Juanito",
@@ -128,7 +149,8 @@
             "genero": "drama",
             "sinopsis": "Tras descubrirse ...",
             "imagen": "https://www.sensacine.com/peliculas/pelicula-127404/",
-            "comentarios": {}
+            "comentarios": {},
+            "puntuacion": {}
         },
         {
             "titulo": "Juanito la saga",
@@ -137,7 +159,8 @@
             "genero": "drama",
             "sinopsis": "Tras descubrirse ...",
             "imagen": "https://www.sensacine.com/peliculas/pelicula-127404/",
-            "comentarios": {}
+            "comentarios": {},
+            "puntuacion": {}
         },
         {
             "titulo": "Deadpool 4",
@@ -146,7 +169,8 @@
             "genero": "drama",
             "sinopsis": "Tras descubrirse ...",
             "imagen": "https://www.sensacine.com/peliculas/pelicula-127404/",
-            "comentarios": {}
+            "comentarios": {},
+            "puntuacion": {}
         }
     ]
 }

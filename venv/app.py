@@ -1,5 +1,6 @@
 import time 
 import os
+import math
 import json
 from http import HTTPStatus
 from flask import Flask,jsonify, Response, request
@@ -172,7 +173,22 @@ def borrar_pelicula():
         return Response({'Pelicula no encontrada'}, HTTPStatus.NOT_FOUND)                
     except:
         return Response({"Error en datos ingresados"}, HTTPStatus.BAD_REQUEST) 
+
+@app.route("/peliculas/puntuacion/<pelicula>", methods=["GET"])
+def puntuar_pelicula(pelicula):
+    print (pelicula)
+    cont = 0
+    suma = 0
+    for pelis in dic_peliculas["peliculas"]:
+        if pelis["titulo"].lower() == pelicula.lower():
+            for llave, valor in pelis['puntuacion'].items():
+                cont = cont + 1
+                suma = suma + valor
+                print(f"{llave}: {valor}")    
+            print(f'* {suma/cont: .2f}')
+            return Response({"Puntuaciones"}, HTTPStatus.ACCEPTED)
     
+    return Response({"No encontrada"}, HTTPStatus.NOT_FOUND)
 
 #################################################################################
 #################### MENU INICIO SESION #####################################    
@@ -272,19 +288,35 @@ def sesion_iniciada(usuario):
         print('|7)Ver comentarios                    |')                
         print('|8)Borrar pelicula                    |')
         print('|9)Editar pelicula                    |')
-        print('|10)Cerrar sesion                     |')            
+        print('|10)Puntuar pelicula                  |')
+        print('|11)Cerrar sesion                     |')             
         print('|                                     |')
         print('+-------------------------------------+')    
         opcion = int(input('¿Que desea realizar? '))
-        if opcion >=11 or opcion <=0:
+        if opcion >=12 or opcion <=0:
             print('Error seleccion invalida...')
             time.sleep(1)
             continue
         elif opcion == 1:
+            cont = 0
+            pag_actual = 1
+            cant_pelic = len(dic_peliculas['peliculas'])
+            paginas_totales = math.trunc(cant_pelic/5)
+            if cant_pelic % 5 > 0:
+                paginas_totales = paginas_totales + 1
+            print (paginas_totales)    
             for pelis in dic_peliculas['peliculas']:
+                cont = cont + 1
                 print ('Pelicula:',pelis['titulo'])
                 print('Link imagen:',pelis['imagen'])
-                time.sleep(1)
+                if cont == 5:
+                    print ('Pagina ('+ str(pag_actual) +'/'+ str(paginas_totales)+')')
+                    pag_actual = pag_actual + 1
+                    continuar = input('Presione una tecla para continuar...')
+                    cont = 0
+                    os.system('cls')    
+            
+                    
             while(True):
                 continuar= input('Presione Enter para continuar...')
                 if continuar != "":    
@@ -573,8 +605,93 @@ def sesion_iniciada(usuario):
                 elif opcion <= 0 or opcion >= 3:
                     print('Seleccione 1 o 2 ')
                     continue     
-                   
+       
         elif opcion == 10:
+            while (True):
+                print ('1) Que pelicula desea puntuar? ')
+                print ('2) Desea ver la puntuacion de una pelicula? ')
+                print ('3) Salir.')
+                opcion = int(input('Que tarea desea realizar? '))
+                if opcion <= 0 or opcion >= 4:
+                    print('Seleccion invalida')
+                    continue
+                elif opcion == 1:
+                    flag = False
+                    flag_puntuacion = False
+                    buscar_peli = input('¿Que pelicula desea puntuar?: ')
+                    for pelis in dic_peliculas['peliculas']:
+                        if buscar_peli.lower() in pelis['titulo'].lower() :
+                            for llaves in pelis['puntuacion']:
+                                if llaves == usuario:
+                                    print('Ya hiciste una puntuacion sobre esa pelicula')
+                                    modificar = input('¿Desea modificarlo? (S/N)')
+                                    if modificar == 's' or modificar=='S':
+                                        break
+                                    else:
+                                        flag_puntuacion = True
+                                        continue
+                            if flag_puntuacion == True:
+                                break
+                            flag = True
+                            print('Hemos encontrado esto para ti: \n')
+                            print("Pelicula:",pelis['titulo'])
+                            print('anio:',pelis['anio'])
+                            print('Link imagen:',pelis['imagen'])
+                            print('Director:',pelis['director'])
+                            print('Genero:',pelis['genero'])
+                            while(True):
+                                puntuacion = int(input('Ingrese del 0-10 para puntuar la pelicula: '))
+                                if puntuacion < 0 or puntuacion > 10:
+                                    print('seleccion invalida')
+                                break    
+                            pelis['puntuacion'].update({usuario:puntuacion})
+                            with open("peliculas.json", 'w') as file:
+                                json.dump(dic_peliculas, file, indent=4)
+                            #    file.seek(0)                         
+                            while(True):
+                                continuar= input('Presione Enter para continuar...')
+                                if continuar != "":    
+                                    print('Error, presione enter')
+                                else:
+                                    break
+                                if flag == False:
+                                    print('Lo sentimos no hemos encontrado esa pelicula, prueba en Netflix...')
+                
+                elif opcion == 2:
+                    flag = False
+                    buscar_peli = input('¿Que pelicula desea buscar?: ')
+                    for pelis in dic_peliculas['peliculas']:
+                        if buscar_peli.lower() in pelis['titulo'].lower() :
+                            if pelis['puntuacion'] == {}:
+                                print("Pelicula:",pelis['titulo'])
+                                print('Esta pelicula aun no tiene una puntuacion...')
+                                time.sleep(2)
+                                flag = True
+                                break
+                            flag = True
+                            print('Hemos encontrado esto para ti: \n')
+                            print("Pelicula:",pelis['titulo'])
+                            print('anio:',pelis['anio'])
+                            print('Link imagen:',pelis['imagen'])
+                            print('Director:',pelis['director'])
+                            print('Genero:',pelis['genero'])
+                            print('Sinopsis:',pelis['sinopsis'])
+                            print('Puntuacion: ')
+                            for llave, valor in pelis['puntuacion'].items():
+                                print(f"{llave}: {valor}")
+                                while(True):
+                                    continuar= input('Presione Enter para continuar...')
+                                    if continuar != "":    
+                                        print('Error, presione enter')
+                                    else:
+                                        break
+                    if flag == False:
+                        print('Lo sentimos no hemos encontrado esa pelicula, prueba en Netflix...')
+                        time.sleep(2)
+                    
+                elif opcion == 3:
+                    break   
+        elif opcion == 11:
             while(True):
                 cambiar_usuario = input('¿Desea cerrar sesion? (S/N)')                    
                 if cambiar_usuario == "s" or cambiar_usuario == "S":
